@@ -2,31 +2,32 @@
 #include <string.h>
 #include "ft_printf.h"
 
-
 size_t	print_int(va_list args)
 {
-	int	print;
+	int	n;
+	char	*print;
 
-	print = (int)args;
-	return (write(1, print, sizeof(int)));
+	n = va_arg(args, int);
+	print = ft_itoa(n);
+	return (write(1, print, ft_strlen(print)));
 }
 
 size_t	print_char(va_list args)
 {
 	char	print;
 
-	print = (char)args;
-	return (write(1, print, sizeof(char)));
+	print = va_arg(args, int);
+	return (write(1, &print, 1));
 }
 
 size_t	print_str(va_list args)
 {
 	char	*print;
 
-	print = (char *)args;
+	print = va_arg(args, char *);
 	return (write(1, print, ft_strlen(print)));
 }
-
+/*
 size_t	print_bint(va_list args)
 {
 	int	print;
@@ -69,17 +70,17 @@ size_t	print_Hint(va_list args)
 	//hacerla (dificil)
 	print = (char)args;
 	return (write(1, print, sizeof(char)));
-}
+}*/
 
-va_list	update_arg(char c, va_list args)
+size_t	arg_filter(char c, va_list args)
 {
 	if (c == 'd')
-		return (print_int(a_arg(args, int)));
+		return (print_int(args));
 	if (c == 'c')
-		return (print_char(va_arg(args, char)));
+		return (print_char(args));
 	if (c == 's')
-		return (print_str(a_arg(args, char *)));
-	if (c == 'i')
+		return (print_str(args));
+	/*if (c == 'i')
 		return (print_bint(va_arg(args, int)));
 	if (c == 'p')
 		return (print_addr(va_arg(args, void *)));
@@ -90,14 +91,13 @@ va_list	update_arg(char c, va_list args)
 	if (c == 'X')
 		return (print_Hint(va_arg(args, unsigned int)));
 	if (c == '%')
-		return (print_char(va_arg(args, char)));
+		return (print_char(va_arg(args, char)));*/
 }
 
 int	ft_printf(char const *s, ...)
 {
 	va_list	args;
 	ssize_t	wbytes;
-	char	c;
 	size_t	i;
 
 	va_start(args, s);
@@ -107,12 +107,12 @@ int	ft_printf(char const *s, ...)
 	{
 		if (s[i++] == '%')
 		{
-			args = update_arg(s[i], args);
-			print_args(
+			wbytes = arg_filter(s[i], args);
 		} else
-			wbytes += write(1, s[i], 1);
+			wbytes += write(1, &s[i], 1);
 		i++;
 	}
+	va_end(args);
 	return (wbytes);
 }
 
