@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: spelfort <spelfort@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/14 18:09:17 by spelfort          #+#    #+#             */
+/*   Updated: 2024/02/14 18:09:24 by spelfort         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	ft_length_pointer(unsigned long long ptr)
@@ -34,11 +46,11 @@ int	ft_print_pointer(unsigned long long ptr)
 	int	size;
 
 	size = 0;
-	size += ft_print_str("0x");
 	if (ptr == 0)
-		size += ft_print_char('0');
+		size += write(1, "(nil)", 5);
 	else
 	{
+		size += ft_print_str("0x");
 		ft_search_pointer(ptr);
 		size += ft_length_pointer(ptr);
 	}

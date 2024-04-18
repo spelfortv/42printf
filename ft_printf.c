@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: spelfort <spelfort@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/14 18:09:17 by spelfort          #+#    #+#             */
+/*   Updated: 2024/02/14 18:09:24 by spelfort         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_print_char(int character)
@@ -43,7 +55,8 @@ int	ft_printf(char const *s, ...)
 		{
 			i++;
 			wbytes += arg_filter(s[i], args);
-		} else
+		}
+		else
 			wbytes += write(1, &s[i], 1);
 		i++;
 	}
