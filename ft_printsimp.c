@@ -12,25 +12,25 @@
 
 #include "ft_printf.h"
 
-int	ft_print_num(int n)
+int	ft_print_num(int num)
 {
 	int	size;
 
 	size = 0;
-	if (n == 0)
+	if (num == 0)
 		size += ft_print_char('0');
-	if (n == -2147483648)
+	if (num == -2147483648)
 	{
 		size += ft_print_str("-2147483648");
 		return (size);
 	}
-	if (n < 0)
+	if (num < 0)
 	{
 		size += ft_print_char('-');
-		n = -n;
+		num = -num;
 	}
-	if (n > 0)
-		size += ft_print_unsigned((unsigned int)n);
+	if (num > 0)
+		size += ft_print_unsigned((unsigned int)num);
 	return (size);
 }
 
@@ -39,13 +39,14 @@ int	ft_print_str(char *str)
 	int	size;
 
 	size = 0;
-	if (str == 0)
+	if (!str)
 	{
 		return (ft_print_str("(null)"));
 	}
-	while (str[size])
+	while (*str)
 	{
-		size += ft_print_char(str[size]);
+		size += ft_print_char(*str);
+		str++;
 	}
 	return (size);
 }

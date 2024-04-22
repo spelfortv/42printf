@@ -1,17 +1,17 @@
+CC		=	gcc
+RM		=	rm -f
+AR		=	ar rc
+RN		=	ranlib
+
 NAME	=	libftprintf.a
 INCLUDE	= 	pintf.h
 
 SRC		=	ft_printf.c			\
 			ft_printsimp.c			\
 			ft_hexadecimal.c	\
-			ft_printpointer.c		\
+			ft_printpointer.c
 
 OBJ		=	${SRC:.c=.o}
-
-CC		=	gcc
-RM		=	rm -f
-AR		=	ar rc
-RN		=	ranlib
 
 CFLAGS	=	-Wall -Wextra -Werror
 
@@ -36,4 +36,5 @@ fclean: clean
 	${RM} $(NAME)
 	@echo "Done !"
 
-re: fclean all  
+re: fclean all
+

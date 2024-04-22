@@ -12,45 +12,45 @@
 
 #include "ft_printf.h"
 
-static void	ft_search_hexadecimal(unsigned int num, const char word)
+static void	ft_search_hexadecimal(unsigned int n, const char type)
 {
-	if (num >= 16)
+	if (n >= 16)
 	{
-		ft_search_hexadecimal(num / 16, word);
-		ft_search_hexadecimal(num % 16, word);
+		ft_search_hexadecimal(n / 16, type);
+		ft_search_hexadecimal(n % 16, type);
 	}
 	else
 	{
-		if (num < 10)
-			ft_print_char(num + '0');
+		if (n < 10)
+			ft_print_char(n + '0');
 		else
 		{
-			if (word == 'x')
-				ft_print_char(num - 10 + 'a');
-			if (word == 'X')
-				ft_print_char(num - 10 + 'A');
+			if (type == 'x')
+				ft_print_char(n - 10 + 'a');
+			if (type == 'X')
+				ft_print_char(n - 10 + 'A');
 		}
 	}
 }
 
-static int	ft_length_hexadecimal(unsigned int num)
+static int	ft_length_hexadecimal(unsigned int n)
 {
 	int	len;
 
 	len = 0;
-	while (num != 0)
+	while (n != 0)
 	{
 		len++;
-		num = num / 16;
+		n /= 16;
 	}
 	return (len);
 }
 
-int	ft_print_hexadecimal(unsigned int num, const char word)
+int	ft_print_hexadecimal(unsigned int num, const char type)
 {
 	if (num == 0)
 		return (ft_print_char('0'));
 	else
-		ft_search_hexadecimal(num, word);
+		ft_search_hexadecimal(num, type);
 	return (ft_length_hexadecimal(num));
 }
